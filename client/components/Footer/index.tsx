@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { products, socialLinks } from "@/constant";
 
 const Footer = () => {
   return (
@@ -16,9 +17,28 @@ const Footer = () => {
             Open an account in minutes, <br/> get full financial control for much longer.
           </h3>
           <div className='flex gap-4'>
-
+            {socialLinks.map((items, index) => (
+              <Link href={items.link} key={index}>
+                <div className="bg-white h-9 w-9 shadow-xl text-base rounded-full flex items-center justify-center footer-icons hover:bg-[#399299]">
+                  <Image src={items.imgSrc} alt={items.imgSrc} width={items.width} height={2} className=""
+                  />  
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
+
+        {/* COLUMN 2/3/4 */}
+        {products.map((product, index) =>(
+          <div key={product.id} className="sm:col-span-2">
+            <p className="text-lg font-medium mb-9">{product.section}</p>
+            {product.link.map((link, index ) => (
+              <li>
+                <Link href={"/"} className="text-darkgray text-base font-normal mb-6 space-links">{link}</Link>
+              </li>
+            ))}
+          </div>
+        ))}
         
       </div>
     </div>

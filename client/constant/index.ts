@@ -4,6 +4,11 @@ interface socialLinks {
   width: number;
 }
 
+interface ProductType {
+  id: number;
+  section: string;
+  link: string[];
+}
 
 const navItems = [
   { id: 1, text: "Home" },
@@ -14,7 +19,7 @@ const navItems = [
 ];
 
 
-const socialLinks: socialLinks[] = [
+export const socialLinks: socialLinks[] = [
   {
       imgSrc: '/assets/footer/facebook.svg',
       link: 'www.facebook.com',
@@ -30,4 +35,23 @@ const socialLinks: socialLinks[] = [
       link: 'www.twitter.com',
       width: 14
   },
+]
+
+export const products: ProductType[] = [
+  {
+      id: 1,
+      section: "Company",
+      link: ['About', 'Careers', 'Mobile', 'Blog', 'How we work?'],
+  },
+  {
+      id: 2,
+      section: "Contact",
+      link: ['Help/FAQ', 'Press', 'Affiliates', 'Hotel owners', 'Partners']
+  }
+  ,
+  {
+      id: 3,
+      section: "More",
+      link: ['Airline fees', 'Airlines', 'Low fare tips', 'Badges &', 'Certificates']
+  }
 ]

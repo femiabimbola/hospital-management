@@ -8,3 +8,9 @@
   }
 }
 
+
+.bg-imagee {
+  background-image: url('/assets/newsletter/bgFile.png');
+  background-size: cover;
+  border-radius: 20px;
+}
