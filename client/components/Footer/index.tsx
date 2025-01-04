@@ -5,18 +5,19 @@ import { products, socialLinks } from "@/constant";
 const Footer = () => {
   return (
     <div className="mx-auto max-w-2xl sm:pt-14 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-      <div className="my-10 grid grid-cols-1 gap-y-10 sm:grid-cols-6 lg:grid-cols-12">
 
+      {/* Upper side */}
+      <div className="my-10 grid grid-cols-1 gap-y-10 sm:grid-cols-6 lg:grid-cols-12">
         {/* Column-1 */}
         <div className='sm:col-span-6 lg:col-span-5'>
           <div className="flex flex-shrink-0 items-center border-right">
             <Image src="/images/logo.webp" className="text-3xl font-bold" width={45} height={45} alt="logo"/>
-            <h1 className="w-full text-xl md:text-2xl font-medium">Iwosan.</h1>
+            <h1 className="w-full text-xl md:text-3xl font-medium">Iwosan.</h1>
           </div>
-          <h3 className='text-xs font-medium text-gunmetalgray lh-160 mt-5 mb-4 lg:mb-16'> 
-            Open an account in minutes, <br/> get full financial control for much longer.
+          <h3 className='font-medium text-gunmetalgray mt-5 mb-4 lg:mb-16'> 
+            Open an account in minutes, get full <br/>financial control for much longer.
           </h3>
-          <div className='flex gap-4'>
+          <div className='flex gap-3'>
             {socialLinks.map((items, index) => (
               <Link href={items.link} key={index}>
                 <div className="bg-white h-9 w-9 shadow-xl text-base rounded-full flex items-center justify-center footer-icons hover:bg-[#399299]">
