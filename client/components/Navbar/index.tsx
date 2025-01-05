@@ -5,6 +5,7 @@ import { useState } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { ThemeToggle } from "./ThemeToggler";
 // import { Menu, X} from 'lucide-react'
+import { Button } from "../ui/button";
 
 const Navbar = () => {
   // State to manage the navbar's visibility
@@ -50,8 +51,9 @@ const Navbar = () => {
 
         {/* The buttons */}
         <div className="gap-x-6 hidden md:flex">
-          <button className="bg-[#399299] text-white px-6 py-2 rounded-xl"> Sign Up</button>
-          <button className="hover:bg-[#399299]  hover:text-white hover:rounded-xl px-6 py-2">Sign In</button>
+          <button className="bg-[#399299] text-white px-6 py-2 rounded-xl"  > Sign Up</button>
+          <Button className="hover:bg-[#399299]  hover:text-white hover:rounded-xl px-6 py-2">Sign In</Button>
+          <a className= 'hover:bg-[#399299] hover:text-white hover:rounded-xl px-6 py-2' href="/login"> login </a>
           <ThemeToggle />
         </div>
 

@@ -13,6 +13,9 @@ const Hero = () => {
             </div>
             <h1 className='text-midnightblue text-4xl sm:text-5xl font-semibold text-center lg:text-start lh-120 pt-5 lg:pt-0'>Advance your engineering skills with us.</h1>
             <h3 className='text-charcoal text-lg font-normal text-center lg:text-start opacity-75 pt-5 lg:pt-0'>Build skills with our courses and mentor from world-class companies.</h3>
+            <div className='flex items-center justify-between pt-10 lg:pt-4'>
+              
+            </div>
           </div>
         </div>
       </div>
