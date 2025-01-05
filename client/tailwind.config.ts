@@ -10,8 +10,9 @@ export default {
   theme: {
   	extend: {
   		colors: {
-  			background: 'var(--background)',
-  			foreground: 'var(--foreground)'
+  			// background: 'var(--background)',
+  			// foreground: 'var(--foreground)'
+				maingreen: "#4ecb71"
   		},
   		borderRadius: {
   			lg: 'var(--radius)',

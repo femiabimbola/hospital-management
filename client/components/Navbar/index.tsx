@@ -51,9 +51,10 @@ const Navbar = () => {
 
         {/* The buttons */}
         <div className="gap-x-6 hidden md:flex">
-          <button className="bg-[#399299] text-white px-6 py-2 rounded-xl"  > Sign Up</button>
-          <Button className="hover:bg-[#399299]  hover:text-white hover:rounded-xl px-6 py-2">Sign In</Button>
-          <a className= 'hover:bg-[#399299] hover:text-white hover:rounded-xl px-6 py-2' href="/login"> login </a>
+          {/* <button className="bg-[#399299] text-white px-6 py-2 rounded-xl"  > Sign Up</button> */}
+          {/* <Button className="hover:bg-[#399299]  hover:text-white hover:rounded-xl px-6 py-2">Sign In</Button> */}
+          <a className=" bg-maingreen px-6 py-2 b dark:bg-white rounded text-white dark:text-black " href="/register"> Register</a>
+          <a className= 'hover:bg-[#399299] bg-black dark:bg-maingreen text-white rounded px-7 py-2 ' href="/login"> login </a>
           <ThemeToggle />
         </div>
 
