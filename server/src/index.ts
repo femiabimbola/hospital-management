@@ -17,10 +17,9 @@ app.get("/", (req: Request, res: Response) => {
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(session(sessionObject))
-app.use(passport.initialize())
-app.use(passport.session())
-// app.use(flash()) 
+// app.use(session(sessionObject))
+// app.use(passport.initialize())
+// app.use(passport.session())
 
 app.use((req: any, res:any, next) => { 
   if (req.session && req.session.messages) { 
@@ -31,7 +30,7 @@ app.use((req: any, res:any, next) => {
    next();
    });
 
-app.use(routes);
+// app.use(routes);
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
