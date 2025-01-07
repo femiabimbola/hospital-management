@@ -6,8 +6,7 @@ import { Input } from "@/components/ui/input"
 import { useForm } from "react-hook-form"
 import { useState } from "react";
 import { z } from "zod"
-import { Form, FormControl, FormDescription,
-  FormField, FormItem, FormLabel, FormMessage,
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage,
 } from "@/components/ui/form"
 import SubmitButton from "../Button"
 
@@ -22,7 +21,9 @@ export const RegisterForm = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const submit = async() => {}
+  const submit = async({username}:  z.infer<typeof registerFormSchema>) => {
+    console.log(username)
+  }
 
   return (
     <Form {...form}>
@@ -43,7 +44,7 @@ export const RegisterForm = () => {
             </FormItem>
           )}
         />
-      <SubmitButton isLoading={isLoading} >Submit</SubmitButton >
+        <SubmitButton isLoading={isLoading} >Submit</SubmitButton >
       </form>
     </Form>
 
