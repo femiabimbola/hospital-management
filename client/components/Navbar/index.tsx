@@ -6,6 +6,7 @@ import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { ThemeToggle } from "./ThemeToggler";
 // import { Menu, X} from 'lucide-react'
 import { Button } from "../ui/button";
+import Link from "next/link";
 
 const Navbar = () => {
   // State to manage the navbar's visibility
@@ -26,7 +27,7 @@ const Navbar = () => {
     <div>
       <div className="flex justify-between items-center h-24 max-w-[1240px] mx-auto px-4">
         {/* Logo for both */}
-        <div className="flex items-center">
+          <Link href={'/'} className="flex items-center">
           <Image
             src="/images/logo.webp"
             className="text-3xl font-bold"
@@ -35,7 +36,7 @@ const Navbar = () => {
             alt="logo"
           />
           <h1 className="w-full text-xl md:text-2xl font-medium">Iwosan.</h1>
-        </div>
+          </Link>
 
         {/* Desktop Navigation */}
         <ul className="hidden md:flex">
