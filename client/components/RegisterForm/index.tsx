@@ -22,7 +22,13 @@ export const RegisterForm = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const submit = async({username}:  z.infer<typeof registerFormSchema>) => {
-    console.log(username)
+    setIsLoading(true)
+    try {
+      console.log(username)
+    } catch (error) {
+      
+    }
+    setIsLoading(false)
   }
 
   return (
