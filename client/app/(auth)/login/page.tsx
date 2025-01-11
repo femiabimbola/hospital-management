@@ -1,10 +1,13 @@
 import { LoginForm } from "@/components/LoginForm";
 import Image from "next/image";
+import { AuthNavbar } from "../AuthNavbar";
+import { AuthFooter } from "../AuthFooter";
 
 const LoginPage = () => {
   return (
     <div className="flex max-h-screen">
-      <section className="my-auto w-[50%]">
+      <section className="my-auto w-[60%]">
+      <AuthNavbar />
         <div className="flex items-center">
           <Image
             src="/images/logo.webp"
@@ -14,13 +17,14 @@ const LoginPage = () => {
         </div>
 
         <LoginForm />
+        <AuthFooter />
       </section>
       <Image
-        src="/assets/login/onboarding-img.webp"
+        src="/assets/login/doctor2.webp"
         alt="patient"
         width={1000}
-        height={1200}
-        className="hidden h-full object-cover md:block max-w-[57.4%]"
+        height={1000}
+        className="hidden h-full md:block max-w-[47%]"
       />
     </div>
   );

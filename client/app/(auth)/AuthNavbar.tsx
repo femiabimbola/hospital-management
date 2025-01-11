@@ -4,7 +4,7 @@ import Link from "next/link"
 
 export const AuthNavbar = () => {
   return (
-    <div className="flex justify-between items-center h-20 max-w-[1440px] mx-auto px-10">
+    <div className="flex justify-between items-center h-20 max-w-[1440px] mx-auto ">
         <Link href={'/'} className="flex items-center">
          <Image
             src="/images/logo.webp"
