@@ -4,9 +4,9 @@ import { AuthNavbar } from "./AuthNavbar";
 const authLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div>
-      <AuthNavbar />
+      {/* <AuthNavbar /> */}
       {children}
-      <AuthFooter />
+      {/* <AuthFooter /> */}
     </div>  
   )
 };

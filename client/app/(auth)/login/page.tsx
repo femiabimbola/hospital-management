@@ -10,7 +10,7 @@ const LoginPage = () => {
             src="/images/logo.webp"
             width={40} height={40} alt="logo"
           />
-          <h1 className="w-full text-xl md:text-3xl font-medium">Iwosan.</h1>
+          <h1 className="w-full text-xl md:text-3xl font-medium">Iwosan</h1>
         </div>
 
         <LoginForm />
@@ -19,8 +19,8 @@ const LoginPage = () => {
         src="/assets/login/onboarding-img.webp"
         alt="patient"
         width={1000}
-        height={1000}
-        className="side-img max-w-[50%]"
+        height={1200}
+        className="hidden h-full object-cover md:block max-w-[57.4%]"
       />
     </div>
   );
