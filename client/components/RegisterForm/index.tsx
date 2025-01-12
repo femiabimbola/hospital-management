@@ -15,16 +15,16 @@ export const RegisterForm = () => {
   const form = useForm<z.infer<typeof registerFormSchema>>({
     resolver: zodResolver(registerFormSchema),
     defaultValues: {
-      username: "",
+      fullName: "",
     },
   })
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const submit = async({username}:  z.infer<typeof registerFormSchema>) => {
+  const submit = async({fullName}:  z.infer<typeof registerFormSchema>) => {
     setIsLoading(true)
     try {
-      console.log(username)
+      console.log(fullName)
     } catch (error) {
       
     }
@@ -36,16 +36,16 @@ export const RegisterForm = () => {
       <form onSubmit={form.handleSubmit(submit)} className="space-y-8">
         <FormField
           control={form.control}
-          name="username"
+          name="fullName"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Username</FormLabel>
+              {/* Put image */}
+              <FormLabel>Full Name</FormLabel>
+              <div>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input placeholder="Enter your full name" {...field} />
               </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
+              </div>
               <FormMessage />
             </FormItem>
           )}
