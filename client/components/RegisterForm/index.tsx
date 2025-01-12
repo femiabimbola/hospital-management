@@ -6,9 +6,11 @@ import { Input } from "@/components/ui/input"
 import { useForm } from "react-hook-form"
 import { useState } from "react";
 import { z } from "zod"
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage,
+import { Form, FormControl,FormField, FormItem, FormLabel, FormMessage,
 } from "@/components/ui/form"
 import SubmitButton from "../Button"
+import Image from "next/image"
+import { Mail } from "lucide-react"
 
 export const RegisterForm = () => {
 
@@ -41,9 +43,12 @@ export const RegisterForm = () => {
             <FormItem>
               {/* Put image */}
               <FormLabel>Full Name</FormLabel>
-              <div>
+              <div className="flex rounded-md border items-center">
+              <Mail width={24} height={24} className="ml-2" />
               <FormControl>
-                <Input placeholder="Enter your full name" {...field} />
+                <Input placeholder="Enter your full name" {...field} 
+                  className="shad-input border-0"
+                />
               </FormControl>
               </div>
               <FormMessage />
