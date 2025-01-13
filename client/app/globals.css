@@ -16,5 +16,5 @@
 }
 
 .shad-input {
-  @apply   text-white  h-11 focus-visible:ring-0 focus-visible:ring-offset-0 !important;
+  @apply  h-11 focus-visible:ring-0 focus-visible:ring-offset-0 !important;
 }
