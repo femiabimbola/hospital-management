@@ -9,8 +9,7 @@ import { z } from "zod"
 import { Form, FormControl,FormField, FormItem, FormLabel, FormMessage,
 } from "@/components/ui/form"
 import SubmitButton from "../Button"
-import Image from "next/image"
-import { Mail, User } from "lucide-react"
+import { Mail, User, Key } from "lucide-react"
 
 export const RegisterForm = () => {
 
@@ -25,10 +24,10 @@ export const RegisterForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false)
 
-  const submit = async({fullName, email}:  z.infer<typeof registerFormSchema>) => {
+  const submit = async({fullName, email, password}:  z.infer<typeof registerFormSchema>) => {
     setIsLoading(true)
     try {
-      console.log(fullName, email)
+      console.log(fullName, email, password)
     } catch (error) {
       
     }
@@ -65,7 +64,6 @@ export const RegisterForm = () => {
           name="email"
           render={({ field }) => (
             <FormItem>
-              {/* Put image */}
               <FormLabel>Email</FormLabel>
               <div className="flex rounded-md border dark:border-gray-800 items-center">
               <Mail width={24} height={24} className="mx-2" />
@@ -81,6 +79,24 @@ export const RegisterForm = () => {
         />
 
         {/* Password */}
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Password</FormLabel>
+              <div className="flex rounded-md border dark:border-gray-800 items-center">
+              <Key width={24} height={24} className="mx-2" />
+              <FormControl>
+                <Input placeholder="Enter your password" {...field} 
+                  className="shad-input border-0 "
+                />
+              </FormControl>
+              </div>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <SubmitButton isLoading={isLoading} >Submit</SubmitButton >
       </form>
     </Form>

@@ -12,7 +12,7 @@ const RegisterPage = () => {
           <AuthNavbar />
         </div>
 
-        <div className="pt-20">
+        <div className="pt-2">
           <h1 className="w-full text-xl md:text-3xl font-bold text-center">
             Create Your Account
           </h1>
