@@ -1,38 +1,45 @@
-"use client"
+"use client";
 
-import { registerFormSchema } from "@/lib/formValidation/registerFormSchema"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { Input } from "@/components/ui/input"
-import { useForm } from "react-hook-form"
+import { registerFormSchema } from "@/lib/formValidation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Input } from "@/components/ui/input";
+import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { z } from "zod"
-import { Form, FormControl,FormField, FormItem, FormLabel, FormMessage,
-} from "@/components/ui/form"
-import SubmitButton from "../Button"
-import { Mail, User, Key } from "lucide-react"
+import { z } from "zod";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import SubmitButton from "../Button";
+import { Mail, User, Key, Eye, EyeOff } from "lucide-react";
 
 export const RegisterForm = () => {
-
   const form = useForm<z.infer<typeof registerFormSchema>>({
     resolver: zodResolver(registerFormSchema),
     defaultValues: {
       fullName: "",
       email: "",
     },
-  })
+  });
 
   const [isLoading, setIsLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
 
-  const submit = async({fullName, email, password}:  z.infer<typeof registerFormSchema>) => {
-    setIsLoading(true)
+  const submit = async ({
+    fullName,
+    email,
+    password,
+  }: z.infer<typeof registerFormSchema>) => {
+    setIsLoading(true);
     try {
-      console.log(fullName, email, password)
-    } catch (error) {
-      
-    }
-    setIsLoading(false)
-  }
+      console.log(fullName, email, password);
+    } catch (error) {}
+    setIsLoading(false);
+  };
 
   return (
     <Form {...form}>
@@ -46,12 +53,14 @@ export const RegisterForm = () => {
               {/* Put image */}
               <FormLabel>Full Name</FormLabel>
               <div className="flex rounded-md border dark:border-gray-800 items-center">
-              <User width={24} height={24} className="mx-2" />
-              <FormControl>
-                <Input placeholder="Enter your full name" {...field} 
-                  className="shad-input border-0 "
-                />
-              </FormControl>
+                <User width={24} height={24} className="mx-2" />
+                <FormControl>
+                  <Input
+                    placeholder="Enter your full name"
+                    {...field}
+                    className="shad-input border-0 "
+                  />
+                </FormControl>
               </div>
               <FormMessage />
             </FormItem>
@@ -66,12 +75,14 @@ export const RegisterForm = () => {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <div className="flex rounded-md border dark:border-gray-800 items-center">
-              <Mail width={24} height={24} className="mx-2" />
-              <FormControl>
-                <Input placeholder="Enter your email address" {...field} 
-                  className="shad-input border-0 "
-                />
-              </FormControl>
+                <Mail width={24} height={24} className="mx-2" />
+                <FormControl>
+                  <Input
+                    placeholder="Enter your email address"
+                    {...field}
+                    className="shad-input border-0 "
+                  />
+                </FormControl>
               </div>
               <FormMessage />
             </FormItem>
@@ -86,21 +97,36 @@ export const RegisterForm = () => {
             <FormItem>
               <FormLabel>Password</FormLabel>
               <div className="flex rounded-md border dark:border-gray-800 items-center">
-              <Key width={24} height={24} className="mx-2" />
-              <FormControl>
-                <Input placeholder="Enter your password" {...field} 
-                  className="shad-input border-0 "
-                />
-              </FormControl>
+                <Key width={24} height={24} className="mx-2" />
+                <FormControl>
+                  <Input
+                    placeholder="Enter your password"
+                    {...field}
+                    className="shad-input border-0 "
+                    type={showPassword ? "text" : "password"}
+                  />
+                </FormControl>
+                {showPassword ? (
+                  <EyeOff
+                    onClick={() => setShowPassword(false)}
+                    className="m-2"
+                  />
+                ) : (
+                  <Eye
+                    className="m-2 "
+                    onClick={() => setShowPassword(true)}
+                  />
+                )}
+              
               </div>
               <FormMessage />
             </FormItem>
           )}
         />
-        <SubmitButton isLoading={isLoading} >Submit</SubmitButton >
+
+        {/* Submit button */}
+        <SubmitButton isLoading={isLoading}>Submit</SubmitButton>
       </form>
     </Form>
-
-  )
-}
-
+  );
+};
