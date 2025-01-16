@@ -27,5 +27,4 @@ model User {
   password                String?
   role                    UserRole               @default(USER)
   isTwoFactorEnabled      Boolean                @default(false)
-  twoFactorConfirmation   TwoFactorConfirmation?
 }
