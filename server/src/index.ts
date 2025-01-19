@@ -5,6 +5,7 @@ import session from "express-session";
 import passport from "passport"
 
 import { sessionObject } from "./utlis/sessionObject";
+import router from "./routes";
 
 dotenv.config();
 
@@ -30,7 +31,7 @@ app.use((req: any, res:any, next) => {
    next();
    });
 
-// app.use(routes);
+app.use(router);
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);

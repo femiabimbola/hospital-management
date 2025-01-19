@@ -21,9 +21,9 @@ export const createUser = async (req: Request, res: any) => {
   
     if (exisitingUser) return res.status(400).send({ msg: "User exists" });
   
-    await db.user.create({ data: {  email, password: hashedPassword } });
+    await db.user.create({ data: { fullName, email, password: hashedPassword } });
     
-    return res.status(201).send({msg: "User created successfully"})
+    return res.status(201).send({msg: "User created successfully", data: {fullName, email, password}})
   } catch (error) {
     res.status(400).send({msg: "Somethingwent wrong"})
   }
