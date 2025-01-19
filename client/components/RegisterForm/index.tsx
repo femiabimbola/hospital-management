@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/form";
 import SubmitButton from "../Button";
 import { Mail, User, Key, Eye, EyeOff } from "lucide-react";
+import axios from "axios"
 
 export const RegisterForm = () => {
   const form = useForm<z.infer<typeof registerFormSchema>>({
@@ -29,14 +30,14 @@ export const RegisterForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  const submit = async ({
-    fullName,
-    email,
-    password,
-  }: z.infer<typeof registerFormSchema>) => {
+  const submit = async (values: z.infer<typeof registerFormSchema>) => {
     setIsLoading(true);
     try {
-      console.log(fullName, email, password);
+      console.log(values.fullName, values.email, values.password);
+      axios.post("http://localhost:9000/api/auth/register", values).then((response: any) => {
+        
+      })
+
     } catch (error) {}
     setIsLoading(false);
   };

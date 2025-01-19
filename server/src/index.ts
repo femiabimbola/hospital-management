@@ -1,8 +1,8 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
-// import routes from "./routes";
 import session from "express-session";
 import passport from "passport"
+import cors from 'cors';
 
 import { sessionObject } from "./utlis/sessionObject";
 import router from "./routes";
@@ -18,6 +18,7 @@ app.get("/", (req: Request, res: Response) => {
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cors());
 app.use(session(sessionObject))
 app.use(passport.initialize())
 // app.use(passport.session())
