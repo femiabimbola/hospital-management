@@ -4,7 +4,8 @@ import bcrypt from "bcryptjs";
 import { getUserByEmail } from "../model/user";
 import { db } from "../lib/db";
 
-export const createUser = async (req: Request, res: Response) => {
+export const createUser = async (req: Request, res: any) => {
+
   const result = validationResult(req);
   if (!result.isEmpty()) {
     return res.status(400).send({ error: result.array().map((err) => err) });
