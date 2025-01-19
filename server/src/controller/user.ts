@@ -12,13 +12,19 @@ export const createUser = async (req: Request, res: Response) => {
   const data = matchedData(req);
 
   const { fullName, email, password  } = data
+  try {
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-  const hashedPassword = await bcrypt.hash(password, 10);
-
-  // const exisitingUser = await db.user.findUnique({ where: { email } });
-  const exisitingUser = await getUserByEmail(email);
-
-  if (exisitingUser) return res.status(400).send({ msg: "User exists" });
-
-  await db.user.create({ data: {  email, password: hashedPassword } });
+    // const exisitingUser = await db.user.findUnique({ where: { email } });
+    const exisitingUser = await getUserByEmail(email);
+  
+    if (exisitingUser) return res.status(400).send({ msg: "User exists" });
+  
+    await db.user.create({ data: {  email, password: hashedPassword } });
+    
+    return res.status(201).send({msg: "User created successfully"})
+  } catch (error) {
+    res.status(400).send({msg: "Somethingwent wrong"})
+  }
+  
 }

@@ -5,4 +5,4 @@ import { createUser } from "../controller/user";
 
 const router = Router();
 
-// router.post("/api/auth/register", checkSchema(createUserValidationSchema), createUser)
+router.post("/api/auth/register", checkSchema(createUserValidationSchema), createUser)
