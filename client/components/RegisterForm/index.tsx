@@ -18,6 +18,7 @@ import SubmitButton from "../Button";
 import { Mail, User, Key, Eye, EyeOff } from "lucide-react";
 import axios from "axios"
 import { useRouter } from "next/navigation";
+const [error, setError] = useState("")
 
 export const RegisterForm = () => {
   const form = useForm<z.infer<typeof registerFormSchema>>({
@@ -25,6 +26,7 @@ export const RegisterForm = () => {
     defaultValues: {
       fullName: "",
       email: "",
+      password: "",
     },
   });
 
@@ -41,8 +43,14 @@ export const RegisterForm = () => {
       console.log(response)
       router.push(`http://localhost:3000/login`)
       
-    } catch (error) {}
-    setIsLoading(false);
+    } catch (error) {
+     
+      // setError(error!.response.data.error[0].msg)
+      console.log(error!.response.data.error[0].msg)
+    }finally {
+      setIsLoading(false);
+    }
+    
   };
 
   return (
