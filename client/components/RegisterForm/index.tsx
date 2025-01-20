@@ -17,6 +17,7 @@ import {
 import SubmitButton from "../Button";
 import { Mail, User, Key, Eye, EyeOff } from "lucide-react";
 import axios from "axios"
+import { useRouter } from "next/navigation";
 
 export const RegisterForm = () => {
   const form = useForm<z.infer<typeof registerFormSchema>>({
@@ -29,15 +30,17 @@ export const RegisterForm = () => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
 
   const submit = async (values: z.infer<typeof registerFormSchema>) => {
     setIsLoading(true);
     try {
       console.log(values.fullName, values.email, values.password);
-      axios.post("http://localhost:9000/api/auth/register", values).then((response: any) => {
-        
-      })
-
+      const response = await axios.post("http://localhost:9000/api/auth/register", values)
+      form.reset()
+      console.log(response)
+      router.push(`http://localhost:3000/login`)
+      
     } catch (error) {}
     setIsLoading(false);
   };
