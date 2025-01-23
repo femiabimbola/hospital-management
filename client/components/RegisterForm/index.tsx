@@ -16,9 +16,10 @@ import {
 } from "@/components/ui/form";
 import SubmitButton from "../Button";
 import { Mail, User, Key, Eye, EyeOff } from "lucide-react";
+import { FormError, FormSuccess } from "@/components/Messages";
 import axios from "axios"
 import { useRouter } from "next/navigation";
-const [error, setError] = useState("")
+
 
 export const RegisterForm = () => {
   const form = useForm<z.infer<typeof registerFormSchema>>({
@@ -32,21 +33,23 @@ export const RegisterForm = () => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("")
+  const [success, setSuccess] = useState("")
   const router = useRouter();
 
   const submit = async (values: z.infer<typeof registerFormSchema>) => {
     setIsLoading(true);
+    setError('')
+    setSuccess('')
     try {
-      console.log(values.fullName, values.email, values.password);
+      // console.log(values.fullName, values.email, values.password);
       const response = await axios.post("http://localhost:9000/api/auth/register", values)
       form.reset()
-      console.log(response)
+      setSuccess(response.data.msg)
       router.push(`http://localhost:3000/login`)
       
-    } catch (error) {
-     
-      // setError(error!.response.data.error[0].msg)
-      console.log(error!.response.data.error[0].msg)
+    } catch (error: any) {
+      setError(error.response.data.error[0].msg)
     }finally {
       setIsLoading(false);
     }
@@ -135,7 +138,8 @@ export const RegisterForm = () => {
             </FormItem>
           )}
         />
-
+        <FormError message={error} />
+        <FormSuccess message={success} />
         {/* Submit button */}
         <SubmitButton isLoading={isLoading}>Submit</SubmitButton>
       </form>
