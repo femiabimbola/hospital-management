@@ -29,3 +29,5 @@ export const createUser = async (req: Request, res: any) => {
   }
   
 }
+
+export const signUser = async(req:Request, res:Response) => {}
