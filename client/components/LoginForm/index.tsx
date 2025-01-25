@@ -7,12 +7,8 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { z } from "zod";
 import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
+  Form, FormControl, FormField,
+  FormItem, FormLabel, FormMessage,
 } from "@/components/ui/form";
 import SubmitButton from "../Button";
 import { Mail, User, Key, Eye, EyeOff } from "lucide-react";

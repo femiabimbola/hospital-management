@@ -2,23 +2,32 @@ import { LoginForm } from "@/components/LoginForm";
 import Image from "next/image";
 import { AuthNavbar } from "../AuthNavbar";
 import { AuthFooter } from "../AuthFooter";
+import Link from "next/link";
 
 const LoginPage = () => {
   return (
     <div className="flex max-h-screen">
-      <section className="my-auto w-[60%]">
-      <AuthNavbar />
-        <div className="flex items-center">
-          <Image
-            src="/images/logo.webp"
-            width={40} height={40} alt="logo"
-          />
-          <h1 className="w-full text-xl md:text-3xl font-medium">Iwosan</h1>
+      <section className="w-[60%] px-14 space-y-16">
+        <div>
+          <AuthNavbar />
+        </div>
+        <div className="pt-2">
+          <h1 className="w-full text-xl md:text-3xl font-bold text-center">
+            Sign In
+          </h1>
+
+          <LoginForm />
+
+          <div className="flex justify-between pt-6">
+            <Link href={"/register"}> Don't have an account?</Link>
+            <Link href={"/forget-password"}> Forget Password</Link>
+          </div>
         </div>
 
-        <LoginForm />
-        <AuthFooter />
+        {/* <AuthFooter /> */}
       </section>
+
+      {/* The right side */}
       <Image
         src="/assets/login/doctor2.webp"
         alt="patient"

@@ -7,7 +7,7 @@ import Link from "next/link";
 const RegisterPage = () => {
   return (
     <div className="flex max-h-screen ">
-      <section className=" w-[60%] px-14 space-y-16">
+      <section className="w-[60%] px-14 space-y-16">
         <div>
           <AuthNavbar />
         </div>
