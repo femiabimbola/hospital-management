@@ -10,7 +10,7 @@ import router from "./routes";
 dotenv.config();
 
 const app: Express = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 7000;
 
 app.get("/", (req: Request, res: Response) => {
   res.status(200).send("Express with TypeScript Server");
