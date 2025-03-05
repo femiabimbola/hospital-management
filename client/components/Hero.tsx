@@ -46,16 +46,20 @@ const Hero = () => {
             />
             <div className="relative aspect-[700/444] w-full">
               <Image
-                className="shadow-solid-l dark:hidden"
+                className="dark:hidden rounded-xl"
                 src="/images/hero/doctors.jpg"
+                height={400}
+                width={650}
                 alt="Hero"
-                fill
+                // fill
               />
               <Image
-                className="hidden shadow-solid-l dark:block"
+                className="hidden dark:block rounded-xl"
                 src="/images/hero/doctors.jpg"
                 alt="Hero"
-                fill
+                // fill
+                height={500}
+                width={650}
               />
             </div>
           </div>
