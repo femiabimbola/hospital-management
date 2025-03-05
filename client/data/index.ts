@@ -1,5 +1,4 @@
 
-
 const featuresData: Feature[] = [
   {
     id: 1,

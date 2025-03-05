@@ -1,4 +1,4 @@
-export type Feature = {
+ interface Feature {
   id: number;
   icon: string;
   title: string;
