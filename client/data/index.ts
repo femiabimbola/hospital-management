@@ -3,21 +3,21 @@ const featuresData: Feature[] = [
   {
     id: 1,
     icon: "/images/icon/icon-01.svg",
-    title: "Crafted for SaaS",
+    title: "Reoccuring Appointment",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor.",
   },
   {
     id: 2,
     icon: "/images/icon/icon-02.svg",
-    title: "High-quality Design",
+    title: "On demand Appointment",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor.",
   },
   {
     id: 3,
     icon: "/images/icon/icon-03.svg",
-    title: "Next.js 13 + TypeScript",
+    title: "Delivering of Genuine Medicine",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor.",
   },
