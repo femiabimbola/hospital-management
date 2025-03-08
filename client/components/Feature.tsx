@@ -20,7 +20,7 @@ const Feature = () => {
   return (
   <section>
     <div className="flex lg:items-center lg:gap-8 xl:gap-20 max-w-[1400px] mx-auto md:px-8 ">
-      <div className="mt-10 gird grid-cols-1 gap-7 ">
+      <div className="mt-10 grid grid-cols-1 gap-7 lg:grid-cols-3">
       {featuresData.map((feature, key) => (
         <SingleFeature feature={feature} key={key} />
       ))}
