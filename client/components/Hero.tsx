@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Hero = () => {
   return (
-    <section className="overflow-hidden pb-20 md:pt-20 xl:pb-25 xl:pt-46 border-red-300 border">
+    <section className="overflow-hidden pb-20 md:pt-20 xl:pt-46 border border-violet-500">
       <div className="flex lg:items-center lg:gap-8 xl:gap-20 max-w-[1400px] mx-auto md:px-8 ">
        
        {/* Left */}
