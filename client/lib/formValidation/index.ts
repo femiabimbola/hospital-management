@@ -17,3 +17,8 @@ export const loginFormSchema = z.object({
     message: "Fullname must be at least 3 characters.",
   })
 })
+
+
+export const resetEmailSchema =  z.object({
+  email: z.string().email("Invalid email address"),
+})
