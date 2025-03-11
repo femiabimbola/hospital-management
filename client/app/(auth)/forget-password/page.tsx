@@ -5,6 +5,7 @@ import Image from "next/image";
 
 
 const ForgetPasswordPage = () => {
+  return (
   <div className="flex max-h-screen">
   <section className="w-[60%] px-14 space-y-16">
     <div>
@@ -30,7 +31,7 @@ const ForgetPasswordPage = () => {
     className="hidden h-full md:block max-w-[47%]"
   />
 </div>
-
+  )
 };
 
 export default ForgetPasswordPage;
