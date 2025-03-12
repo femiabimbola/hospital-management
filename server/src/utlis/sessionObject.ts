@@ -1,12 +1,20 @@
-import genFunc from 'connect-pg-simple';
+// import genFunc from 'connect-pg-simple';
 import session from "express-session";
+import connectPgSimple from 'connect-pg-simple'
 
-const PostgresqlStore = genFunc(session);
+// const PostgresqlStore = genFunc(session);
 
-const sessionStore = new PostgresqlStore({
+// const sessionStore = new PostgresqlStore({
+//   conString: process.env.DATABASE_URL,
+//   ttl: 2 * 60 * 60
+// });
+
+const pgSession = connectPgSimple(session);
+
+const sessionStore = new pgSession({
   conString: process.env.DATABASE_URL,
-  ttl: 2 * 60 * 60
-});
+  tableName: 'session', 
+})
 
 
 export const sessionObject = {

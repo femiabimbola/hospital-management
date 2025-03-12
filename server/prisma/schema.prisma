@@ -29,3 +29,10 @@ model User {
   role                    UserRole               @default(USER)
   isTwoFactorEnabled      Boolean                @default(false)
 }
+
+model Session {
+  id       String   @id @default(cuid())
+  sid      String    @unique
+  sess     Json
+  expires  DateTime
+}
