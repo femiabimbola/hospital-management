@@ -1,10 +1,10 @@
 import { query, validationResult, body, matchedData } from "express-validator";
 
 export const createUserValidationSchema = {
-  frstName: {
+  firstName: {
     isLength: {
       options: { min: 3, max: 32 },
-      errorMessage: "firstame cannot be less than 2",
+      errorMessage: "firstname cannot be less than 2",
     },
     notEmpty: { errorMessage: "firstname can not be empty" },
     isString: { errorMessage: "firstname is a string" },

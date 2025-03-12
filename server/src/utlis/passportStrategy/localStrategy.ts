@@ -30,13 +30,12 @@ export default passport.use(
       const findUser = await getUserByEmail(username);
     
       if(!findUser) return done(null, false, { message: 'User is not found'})
-      console.log("33")
       const passwordsMatch = await bcrypt.compare(password, findUser.password); 
       console.log(passwordsMatch)
       if(!passwordsMatch) return done(null, false, { message: 'Password does not match'})
-   
       // The done has 3 arg! Check the docs
-      done(null, findUser)
+      console.log(findUser)
+      return done(null, findUser, {message: 'User is signed in'})
     }catch(error){
       done(error, false)
     }

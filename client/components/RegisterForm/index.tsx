@@ -86,7 +86,7 @@ export const RegisterForm = () => {
           {/* Last Name*/}
           <FormField
           control={form.control}
-          name="firstName"
+          name="lastName"
           render={({ field }) => (
             <FormItem>
               {/* Put image */}

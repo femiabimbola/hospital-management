@@ -2,6 +2,7 @@ import genFunc from 'connect-pg-simple';
 import session from "express-session";
 
 const PostgresqlStore = genFunc(session);
+
 const sessionStore = new PostgresqlStore({
   conString: process.env.DATABASE_URL,
   ttl: 2 * 60 * 60
