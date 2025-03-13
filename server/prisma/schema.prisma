@@ -30,9 +30,8 @@ model User {
   isTwoFactorEnabled      Boolean                @default(false)
 }
 
-model Session {
-  id       String   @id @default(cuid())
-  sid      String    @unique
+model session {
+  sid      String   @id @unique
   sess     Json
-  expires  DateTime
+  expire  DateTime
 }

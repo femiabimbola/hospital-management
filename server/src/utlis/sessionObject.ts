@@ -16,6 +16,9 @@ const pgSession = connectPgSimple(session);
 
 const sessionStore = new pgSession({
   conString: process.env.DATABASE_URL,
+  createTableIfMissing: true,
+  ttl: 2 * 2 * 60 * 60,
+  pruneSessionInterval: 2 * 60 * 60
   // tableName: 'session', 
 })
 
