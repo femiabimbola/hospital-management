@@ -16,12 +16,17 @@ app.get("/", (req: Request, res: Response) => {
   res.status(200).send("Express with TypeScript Server");
 });
 
+
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 app.use(session(sessionObject))
 app.use(passport.initialize())
 app.use(passport.session())
+
+
+
 
 // app.use((req: any, res:any, next) => { 
 //   if (req.session && req.session.messages) { 

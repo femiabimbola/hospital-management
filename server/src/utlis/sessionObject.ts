@@ -1,6 +1,9 @@
 // import genFunc from 'connect-pg-simple';
 import session from "express-session";
 import connectPgSimple from 'connect-pg-simple'
+import dotenv from "dotenv";
+
+dotenv.config();
 
 // const PostgresqlStore = genFunc(session);
 
@@ -13,7 +16,7 @@ const pgSession = connectPgSimple(session);
 
 const sessionStore = new pgSession({
   conString: process.env.DATABASE_URL,
-  tableName: 'session', 
+  // tableName: 'session', 
 })
 
 
