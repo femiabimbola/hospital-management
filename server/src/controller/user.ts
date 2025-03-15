@@ -21,7 +21,7 @@ export const createUser = async (req: Request, res: any) => {
     const exisitingUser = await getUserByEmail(email);
   
     if (exisitingUser) return res.status(400).send({ msg: "User exists" });
-  
+
     await db.user.create({ data: { firstName, lastName, email, password: hashedPassword, role:'USER' } });
     
     return res.status(201).send({msg: "User created successfully", data: {firstName, lastName, email, password, }})

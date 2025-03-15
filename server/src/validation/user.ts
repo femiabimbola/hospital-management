@@ -19,7 +19,6 @@ export const createUserValidationSchema = {
     isString: { errorMessage: "Last name is a string" },
   },
 
-
   email: {
     notEmpty: { errorMessage: "email cannot be empty" },
     isEmail: { errorMessage: "Enter a valid email" },
