@@ -3,6 +3,8 @@ import { validationResult, matchedData } from "express-validator";
 import bcrypt from "bcryptjs";
 import { getUserByEmail } from "../model/user";
 import { db } from "../lib/db";
+import { sendVerificationEmail } from "../lib/mail/sendMail";
+import { generateVerificationToken } from "../lib/tokens/generateVerificationToken";
 
 export const createUser = async (req: Request, res: any) => {
 
@@ -23,6 +25,10 @@ export const createUser = async (req: Request, res: any) => {
     if (exisitingUser) return res.status(400).send({ msg: "User exists" });
 
     await db.user.create({ data: { firstName, lastName, email, password: hashedPassword, role:'USER' } });
+
+    const verificationToken = await generateVerificationToken(email)
+
+    await sendVerificationEmail(verificationToken.email, verificationToken.token)
     
     return res.status(201).send({msg: "User created successfully", data: {firstName, lastName, email, password, }})
   } catch (error) {

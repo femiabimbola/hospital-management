@@ -24,7 +24,8 @@
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
     "resend": "^4.1.2",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
