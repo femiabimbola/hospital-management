@@ -27,7 +27,6 @@ export const createUser = async (req: Request, res: any) => {
     await db.user.create({ data: { firstName, lastName, email, password: hashedPassword, role:'USER' } });
 
     const verificationToken = await generateVerificationToken(email)
-
     await sendVerificationEmail(verificationToken.email, verificationToken.token)
     
     return res.status(201).send({msg: "User created successfully", data: {firstName, lastName, email, password, }})
@@ -39,4 +38,8 @@ export const createUser = async (req: Request, res: any) => {
 
 export const signUser = (req: any, res: Response) => {
   res.status(201).send({msg: "successfully log in"});
+}
+
+export const verifyUser  = (req:any, res: Response) => {
+  res.status(201).send({msg: "verified successfully"});
 }
