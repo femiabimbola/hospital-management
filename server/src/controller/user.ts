@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs";
 import { getUserByEmail } from "../model/user";
 import { db } from "../lib/db";
 import { sendVerificationEmail } from "../lib/mail/sendMail";
-import { generateVerificationToken } from "../lib/tokens/generateVerificationToken";
+import { generateVerificationToken, getVerificationTokenByToken } from "../lib/tokens/generateVerificationToken";
 
 export const createUser = async (req: Request, res: any) => {
 
@@ -13,8 +13,8 @@ export const createUser = async (req: Request, res: any) => {
   if (!result.isEmpty()) {
     return res.status(400).send({ error: result.array().map((err) => err) });
   }
-  const data = matchedData(req);
 
+  const data = matchedData(req);
   const { firstName, lastName, email, password  } = data
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -40,6 +40,34 @@ export const signUser = (req: any, res: Response) => {
   res.status(201).send({msg: "successfully log in"});
 }
 
-export const verifyUser  = (req:any, res: Response) => {
-  res.status(201).send({msg: "verified successfully"});
+
+export const verifyUser  = async (req:any, res: Response) => {
+
+const token = req.params
+
+const existingToken = await getVerificationTokenByToken(token)
+if(!existingToken) return res.status(400).send({ msg: "Token does not exist" });
+
+const hasExpired = new Date(existingToken.expires) < new Date();
+if(hasExpired) return res.status(400).send({ msg: "Token has expired" });
+
+const existingUser = await getUserByEmail(existingToken.email)
+if(!existingUser) return  res.status(400).send({ msg: "Token has expired" });
+
+
+// Prisma update and delete is done here
+
+await db.user.update({
+  where: {id: existingUser.id},
+  data:{
+    emailVerified: new Date(),
+    email: existingToken.email
+  }
+})
+
+await db.verificationToken.delete({
+  where: { id: existingToken.id}
+})
+
+res.status(201).send({msg: "verified successfully"});
 }

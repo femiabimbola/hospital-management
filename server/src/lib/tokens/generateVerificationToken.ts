@@ -11,6 +11,16 @@ export const getVerificationTokenByEmail = async( email: string) => {
   }
 }
 
+export const getVerificationTokenByToken = async( token: string) => {
+  try {
+    const verificiationToken = await db.verificationToken.findUnique({ where: {token} })
+    return verificiationToken
+  } catch(error) {
+    return null
+  }
+}
+
+
 export const generateVerificationToken = async (email: string) => {
   const token = uuid();
   const expires = new Date(new Date().getTime() + 3600 * 1000);
