@@ -42,8 +42,7 @@ export const signUser = (req: any, res: Response) => {
 
 
 export const verifyUser  = async (req:any, res: Response) => {
-
-const token = req.params
+const token = req.query.token;
 
 const existingToken = await getVerificationTokenByToken(token)
 if(!existingToken) return res.status(400).send({ msg: "Token does not exist" });

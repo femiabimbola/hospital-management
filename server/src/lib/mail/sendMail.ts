@@ -9,7 +9,7 @@ const domain = process.env.NEXT_PUBLIC_APP_URL;
 
 export const sendVerificationEmail = async ( email: string, token: string) => { 
 
-  const confirmationLink = `${domain}/auth/new-verification?token=${token}`;
+  const confirmationLink = `${domain}/api/auth/verify?token=${token}`;
 
   try {
     const {data, error} = await resend.emails.send({
