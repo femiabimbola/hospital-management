@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import session from "express-session";
 import passport from "passport"
 import cors from 'cors';
+import flash from "express-flash"
 
 import { sessionObject } from "./utlis/sessionObject";
 import router from "./routes";
@@ -24,6 +25,7 @@ app.use(cors());
 app.use(session(sessionObject))
 app.use(passport.initialize())
 app.use(passport.session())
+app.use(flash())
 
 
 

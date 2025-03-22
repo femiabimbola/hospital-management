@@ -9,6 +9,10 @@ import {
   getVerificationTokenByToken,
 } from "../lib/tokens/generateVerificationToken";
 
+
+import passport from 'passport'
+import { Strategy } from 'passport-local'
+
 export const createUser = async (req: Request, res: any) => {
   const result = validationResult(req);
 
@@ -92,3 +96,24 @@ export const verifyUser = async (req: Request, res: Response) => {
       .send({ msg: "An error occurred", error: error.message });
   }
 };
+
+
+// export const login = (req: Request, res: any, next: NextFunction) => {
+//   passport.authenticate('local', (err:Error, user:any, info:any) => {
+//     if (err) {
+//       return next(err); // Pass errors to Express error handler
+//     }
+//     if (!user) {
+//       // Access the error message from the 'info' object
+//       return res.status(401).json({ message: info.message });
+//     }
+//     // Successful login
+//     req.logIn(user, (err) => {
+//       if (err) {
+//         return next(err);
+//       }
+//       return res.status(200).json({ message: 'Login successful', user: req.user });
+//     });
+//   })(req, res, next);
+// } ;
+
