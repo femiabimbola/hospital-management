@@ -9,6 +9,8 @@ const router = Router();
 
 router.post("/api/auth/register", checkSchema(createUserValidationSchema), createUser)
 // router.post("/api/auth/login", passport.authenticate("local", {failureMessage: true,}), signUser)
+
+// @ts-ignore
 router.get("/api/auth/verify", verifyUser)
 router.post("/api/auth/login", passport.authenticate("local"), signUser)
 // router.post("/api/auth/login",  signUser)
