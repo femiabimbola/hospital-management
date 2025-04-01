@@ -84,7 +84,6 @@ export const verifyUser = async (req: Request, res: Response) => {
   const token = req.query.token as string;
 
   console.log(token)
-
   try {
     const existingToken = await getVerificationTokenByToken(token);
     if (!existingToken) return res.status(400).send({ msg: "Token does not exist" });
@@ -135,3 +134,20 @@ export const login = (req: Request, res: any, next: NextFunction) => {
   })(req, res, next);
 } ;
 
+
+export const user =  (req: Request, res: any, next: NextFunction) => {
+  // This isAuthenticated
+  if(!req.isAuthenticated) return res.status(401).json({message: "Access denied"})
+  
+  res.status(200).json({message:req.user})
+}
+
+export const logout =  (req: Request, res: any, next: NextFunction) => {
+  
+  // This isAuthenticated
+  req.logOut((error) => {
+    if(error) return res.status(200).json({error: "Something went wrong"})
+  })
+  
+  res.status(200).json({message:"Successfully logout"})
+}
