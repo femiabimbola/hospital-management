@@ -1,5 +1,6 @@
 import passport from 'passport'
 import { Strategy } from 'passport-local'
+import LocalStrategy from "passport-local"
 import bcrypt from "bcryptjs"
 import { getUserByEmail, getUserById } from '../../model/user'
 import { generateVerificationToken } from '../../lib/tokens/generateVerificationToken'
@@ -11,12 +12,14 @@ passport.serializeUser((user:any, done) => {
   done(null, user.id)
 })
 
-// The deserialize function take the id from session, and find who the user is.it get called afteruser sign in and call other routes
+// The deserialize function take the id from session, and find who the user is.
+// It is called on every req after the user logs in 
 passport.deserializeUser(async (id: string, done) => {
   console.log("inside deserializer")
   try {
     const findUser = await getUserById(id) 
-    if (!findUser) throw new Error("user not found");
+    // if (!findUser) throw new Error("user not found");
+    if(!findUser) return done(new Error("user not found"))
     done(null, findUser);
   } catch (error) {
     done(error, false);
@@ -26,6 +29,10 @@ passport.deserializeUser(async (id: string, done) => {
 
 // Yet to figure out how to pass message to the frontend
 
+/**
+ * passport.use(new LocalStrategy({ {usernameField:"email"}, async (email, password, done)}))
+ */
+
 export default passport.use(
  
   new Strategy({usernameField:"email"}, async (username, password, done) =>{
@@ -34,8 +41,10 @@ export default passport.use(
       const findUser = await getUserByEmail(username);
     
       if(!findUser) return done(null, false, { message: 'User is not found'})
+        // if(!findUser) return done(new Error("User not found"), false, { message: 'User is not found'}) 
       const passwordsMatch = await bcrypt.compare(password, findUser.password); 
       if(!passwordsMatch) return done(null, false, { message: 'Password does not match'})
+
       // The done has 3 arg! Check the docs
       console.log(findUser)
       if(findUser.emailVerified === null){

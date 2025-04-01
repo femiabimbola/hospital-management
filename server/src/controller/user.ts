@@ -46,6 +46,7 @@ export const createUser = async (req: Request, res: any) => {
       verificationToken.token
     );
 
+    
     return res
       .status(201)
       .send({
@@ -57,9 +58,26 @@ export const createUser = async (req: Request, res: any) => {
   }
 };
 
-export const signUser = (req: any, res: Response) => {
+export const signUser2 = (req: any, res: Response, next: NextFunction) => {
+
   res.status(201).send({ msg: "successfully log in" });
 };
+
+ 
+
+export const signUser = async (req: Request, res: any, next:NextFunction) => {
+
+  passport.authenticate("local", (error:any, user:any, info:any)  => {
+    if(error) return res.status(500).json({error: "something went wrong"})
+    if(!user) return res.status(401).json(info)
+
+    req.login(user, error => {
+      if(error) return res.status(500).json({error: "something went wrong"})
+      return res.status(200).json({id:user})
+    })
+  })(req, res, next)
+}
+
 
 
 export const verifyUser = async (req: Request, res: Response) => {
@@ -98,22 +116,22 @@ export const verifyUser = async (req: Request, res: Response) => {
 };
 
 
-// export const login = (req: Request, res: any, next: NextFunction) => {
-//   passport.authenticate('local', (err:Error, user:any, info:any) => {
-//     if (err) {
-//       return next(err); // Pass errors to Express error handler
-//     }
-//     if (!user) {
-//       // Access the error message from the 'info' object
-//       return res.status(401).json({ message: info.message });
-//     }
-//     // Successful login
-//     req.logIn(user, (err) => {
-//       if (err) {
-//         return next(err);
-//       }
-//       return res.status(200).json({ message: 'Login successful', user: req.user });
-//     });
-//   })(req, res, next);
-// } ;
+export const login = (req: Request, res: any, next: NextFunction) => {
+  passport.authenticate('local', (err:Error, user:any, info:any) => {
+    if (err) {
+      return next(err); // Pass errors to Express error handler
+    }
+    if (!user) {
+      // Access the error message from the 'info' object
+      return res.status(401).json({ message: info.message });
+    }
+    // Successful login
+    req.logIn(user, (err) => {
+      if (err) {
+        return next(err);
+      }
+      return res.status(200).json({ message: 'Login successful', user: req.user });
+    });
+  })(req, res, next);
+} ;
 
