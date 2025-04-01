@@ -40,8 +40,8 @@ export default passport.use(
     try{
       const findUser = await getUserByEmail(username);
     
-      if(!findUser) return done(null, false, { message: 'User is not found'})
-        // if(!findUser) return done(new Error("User not found"), false, { message: 'User is not found'}) 
+      if(!findUser) return done(null, false, { message: 'User is not found o'})
+        
       const passwordsMatch = await bcrypt.compare(password, findUser.password); 
       if(!passwordsMatch) return done(null, false, { message: 'Password does not match'})
 

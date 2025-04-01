@@ -13,7 +13,7 @@ router.post("/api/auth/register", checkSchema(createUserValidationSchema), creat
 // @ts-ignore
 router.get("/api/auth/verify", verifyUser)
 
-router.post("/api/auth/login", passport.authenticate("local", {failureFlash: true, failureRedirect: '/login' } ), signUser)
+router.post("/api/auth/login", signUser)
 
 
 export default router

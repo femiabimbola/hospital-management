@@ -7,6 +7,7 @@ import cors from 'cors';
 
 import { sessionObject } from "./utlis/sessionObject";
 import router from "./routes";
+import { db } from "./lib/db";
 
 dotenv.config();
 
@@ -28,14 +29,14 @@ app.use(passport.session())
 
 app.use(router);
 
-app.use((req: any, res:any, next) => { 
-  if (req.session && req.session.messages) { 
-    res.locals.messages = req.session.messages; 
-    req.session.messages = [];
-    // console.log(res.locals.messages)
-   } 
-   next();
-   });
+// app.use((req: any, res:any, next) => { 
+//   if (req.session && req.session.messages) { 
+//     res.locals.messages = req.session.messages; 
+//     req.session.messages = [];
+//     // console.log(res.locals.messages)
+//    } 
+//    next();
+//    });
 
    app.use((err:any, req: any, res:any, next:NextFunction) => {
     res.status(err.status >= 100 && err.status < 600 ? err.status : 500);

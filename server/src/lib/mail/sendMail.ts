@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const resend = new Resend(process.env.RESEND_API_KEY);
-const domain = process.env.NEXT_PUBLIC_APP_URL;
+const domain = process.env.NEXT_PUBLIC_API_URL;
 
 export const sendVerificationEmail = async ( email: string, token: string) => { 
 
@@ -19,9 +19,8 @@ export const sendVerificationEmail = async ( email: string, token: string) => {
       html: `<p>  Click <a href="${confirmationLink}"> here </a> to confirm your email </p>`,
     });
 
-   
   } catch(error) {
-   
+   throw new Error;
   }
 
   return 
