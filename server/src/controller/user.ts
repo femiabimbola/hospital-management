@@ -138,7 +138,6 @@ export const login = (req: Request, res: any, next: NextFunction) => {
 export const user =  (req: Request, res: any, next: NextFunction) => {
   // This isAuthenticated
   if(!req.isAuthenticated) return res.status(401).json({message: "Access denied"})
-  
   res.status(200).json({message:req.user})
 }
 
