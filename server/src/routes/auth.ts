@@ -3,7 +3,7 @@ import passport from "passport";
 import {  checkSchema } from "express-validator";
 import "../utlis/passportStrategy/localStrategy";
 import { createUserValidationSchema } from "../validation/user";
-import { createUser, signUser, verifyUser } from "../controller/user";
+import { createUser, signUser, signUser2, verifyUser } from "../controller/user";
 
 const router = Router();
 
@@ -14,6 +14,10 @@ router.post("/api/auth/register", checkSchema(createUserValidationSchema), creat
 router.get("/api/auth/verify", verifyUser)
 
 router.post("/api/auth/login", signUser)
+
+//for google
+// router.get('/api/auth/google', passport.authenticate('google', {scope: ['google', 'email']}),)
+// router.get("/api/auth/google/callback", passport.authenticate('google', {}),  signUser2 );
 
 
 export default router

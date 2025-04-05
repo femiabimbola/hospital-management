@@ -13,6 +13,7 @@ import {
 import passport from 'passport'
 import { Strategy } from 'passport-local'
 
+
 export const createUser = async (req: Request, res: any) => {
   const result = validationResult(req);
 
@@ -60,7 +61,7 @@ export const createUser = async (req: Request, res: any) => {
 
 export const signUser2 = (req: any, res: Response, next: NextFunction) => {
 
-  res.status(201).send({ msg: "successfully log in" });
+  res.redirect("http://localhost:3000 ")
 };
 
  
@@ -141,12 +142,20 @@ export const user =  (req: Request, res: any, next: NextFunction) => {
   res.status(200).json({message:req.user})
 }
 
+/**
+ * 
+ * @param req 
+ * @param res 
+ * @param next 
+ */
 export const logout =  (req: Request, res: any, next: NextFunction) => {
-  
   // This isAuthenticated
   req.logOut((error) => {
     if(error) return res.status(200).json({error: "Something went wrong"})
   })
-  
   res.status(200).json({message:"Successfully logout"})
+}
+
+export const forgotPassword = (req:Request, res:any, next: NextFunction) => {
+  
 }
