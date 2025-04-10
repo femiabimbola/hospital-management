@@ -37,14 +37,15 @@ export const LoginForm = () => {
     setError('')
     setSuccess('')
     try {
-      // console.log(values.fullName, values.email, values.password);
-      const response = await axios.post("http://localhost:9000/api/auth/register", values)
+      console.log( values.email, values.password);
+      const response = await axios.post("http://localhost:9000/api/auth/login", values)
       form.reset()
       setSuccess(response.data.msg)
-      router.push(`http://localhost:3000/login`)
+      router.push(`http://localhost:3000/`)
       
     } catch (error: any) {
-      setError(error.response.data.error[0].msg)
+      console.log(error)
+      setError(error.response.data.message)
     }finally {
       setIsLoading(false);
     }
@@ -53,9 +54,9 @@ export const LoginForm = () => {
 
   return (
     <Form {...form}>
+      <FormError message={error} />
+      <FormSuccess message={success} />
       <form onSubmit={form.handleSubmit(submit)} className="space-y-4">
-        {/* full name */}
-
         {/* email */}
         <FormField
           control={form.control}
@@ -102,7 +103,7 @@ export const LoginForm = () => {
                   />
                 ) : (
                   <Eye
-                    className="m-2 "
+                    className="m-2"
                     onClick={() => setShowPassword(true)}
                   />
                 )}
@@ -112,8 +113,7 @@ export const LoginForm = () => {
             </FormItem>
           )}
         />
-        <FormError message={error} />
-        <FormSuccess message={success} />
+
         {/* Submit button */}
         <SubmitButton isLoading={isLoading}>Submit</SubmitButton>
       </form>
