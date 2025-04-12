@@ -25,3 +25,20 @@ export const sendVerificationEmail = async ( email: string, token: string) => {
 
   return 
 }
+
+export const sendPassportResetMail = async ( email: string, token: string) => { 
+
+  const PasswordResetLink = `${domain}/api/auth/reset?token=${token}`;
+  try {
+    const {data, error} = await resend.emails.send({
+      from: 'femi J <hello@janennajiat50.com.ng>', 
+      to: email,
+      subject: 'Confirm Your Email',
+      html: `<p>  Click <a href="${PasswordResetLink}"> here </a> to confirm your email </p>`,
+    });
+
+  } catch(error) {
+   throw new Error;
+  }
+
+}

@@ -42,12 +42,35 @@ export const generateVerificationToken = async (email: string) => {
 };
 
 
+
+
+export const getPasswordResetTokenByEmail = async( email: string) => {
+  try {
+    const verificiationToken = await db.passwordResetToken.findFirst({ where: {email} })
+    return verificiationToken
+  } catch(error) {
+    return null
+  }
+}
+
+export const getPasswordResetByToken = async( token: string) => {
+  try {
+    const verificiationToken = await db.passwordResetToken.findUnique({ where: {token} })
+    console.log("hey")
+    return verificiationToken
+  } catch(error) {
+    return null
+  }
+}
+
+
+
 export const generatePasswordResetToken = async (email: string) => {
 
   const token = uuid();
   const expires = new Date(new Date().getTime() + 3600 * 1000);
 
-  const existingToken = await getVerificationTokenByEmail(email);
+  const existingToken = await getPasswordResetTokenByEmail(email);
 
   // shows how to remove a value from database
   if (existingToken) {
@@ -55,9 +78,9 @@ export const generatePasswordResetToken = async (email: string) => {
       where: {id: existingToken.id},
     });
   }
-  const verificationToken = await db.passwordResetToken.create({
+  const PasswordResetToken = await db.passwordResetToken.create({
     data: {email, token, expires},
   });
 
-  return verificationToken;
+  return PasswordResetToken;
 };

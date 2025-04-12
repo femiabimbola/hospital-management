@@ -5,6 +5,7 @@ import { getUserByEmail } from "../model/user";
 import { db } from "../lib/db";
 import { sendVerificationEmail } from "../lib/mail/sendMail";
 import {
+  generatePasswordResetToken,
   generateVerificationToken,
   getVerificationTokenByToken,
 } from "../lib/tokens/generateVerificationToken";
@@ -143,7 +144,6 @@ export const user =  (req: Request, res: any, next: NextFunction) => {
 }
 
 /**
- * 
  * @param req 
  * @param res 
  * @param next 
@@ -156,6 +156,33 @@ export const logout =  (req: Request, res: any, next: NextFunction) => {
   res.status(200).json({message:"Successfully logout"})
 }
 
-export const forgotPassword = (req:Request, res:any, next: NextFunction) => {
+
+export const sendPassportResetMail = async (req: Request, res: any, next: NextFunction) =>{
+  const result = validationResult(req);
+
+  if (!result.isEmpty()) {
+    return res.status(400).send({ error: result.array().map((err) => err) });
+  }
+
+  const data = matchedData(req);
+  const {email} = data;
+  try {
+    const exisitingUser = await getUserByEmail(email);
+
+    if (!exisitingUser) return res.status(400).send({ message: "Users is not found" });
   
+    const PasswordResetToken = await generatePasswordResetToken(email);
+      await sendVerificationEmail(
+        PasswordResetToken.email,
+        PasswordResetToken.token
+      );
+    
+      res.status(200).send({ msg: "Password reset email sent" });
+    
+  } catch (error:any) {
+    console.error(error);
+    return res.status(500).send({ msg: "An error occurred", error: error.message });
+  }
+
+
 }
