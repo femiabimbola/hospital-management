@@ -51,3 +51,11 @@ export const loginUserValidationSchema = {
     },
   }
 }
+
+export const sendResetPasswordValidationSchema = {
+  email: {
+    notEmpty: { errorMessage: "email cannot be empty" },
+    isEmail: { errorMessage: "Enter a valid email" },
+  },
+
+}

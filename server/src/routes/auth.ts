@@ -2,7 +2,7 @@ import { Request, NextFunction, Router } from "express";
 import passport from "passport";
 import {  checkSchema } from "express-validator";
 import "../utlis/passportStrategy/localStrategy";
-import { createUserValidationSchema } from "../validation/user";
+import { createUserValidationSchema,sendResetPasswordValidationSchema, loginUserValidationSchema } from "../validation/user";
 import { createUser, sendPassportResetMail, signUser, signUser2, verifyUser } from "../controller/user";
 
 const router = Router();
@@ -13,9 +13,9 @@ router.post("/api/auth/register", checkSchema(createUserValidationSchema), creat
 // @ts-ignore
 router.get("/api/auth/verify", verifyUser)
 
-router.post("/api/auth/login", signUser)
+router.post("/api/auth/login", checkSchema(loginUserValidationSchema), signUser)
 
-router.post("/api/auth/forgot-password", sendPassportResetMail)
+router.post("/api/auth/forgot-password",  checkSchema(sendResetPasswordValidationSchema), sendPassportResetMail)
 
 //for google
 // router.get('/api/auth/google', passport.authenticate('google', {scope: ['google', 'email']}),)

@@ -65,7 +65,6 @@ export const signUser2 = (req: any, res: Response, next: NextFunction) => {
   res.redirect("http://localhost:3000 ")
 };
 
- 
 
 export const signUser = async (req: Request, res: any, next:NextFunction) => {
 
@@ -163,7 +162,6 @@ export const sendPassportResetMail = async (req: Request, res: any, next: NextFu
   if (!result.isEmpty()) {
     return res.status(400).send({ error: result.array().map((err) => err) });
   }
-
   const data = matchedData(req);
   // const {email} = data;
   const email = req.body.email
@@ -186,3 +184,38 @@ export const sendPassportResetMail = async (req: Request, res: any, next: NextFu
   }
 
 }
+
+// Yet to solv
+export const newPassword = async (req: Request, res: Response) => {
+  const token = req.query.token as string;
+
+  console.log(token)
+  try {
+    const existingToken = await getVerificationTokenByToken(token);
+    if (!existingToken) return res.status(400).send({ msg: "Token does not exist" });
+
+    const hasExpired = new Date(existingToken.expires) < new Date();
+    if (hasExpired) return res.status(400).send({ msg: "Token has expired" });
+
+    const existingUser = await getUserByEmail(existingToken.email);
+    if (!existingUser) return res.status(400).send({ msg: "Token has expired" });
+
+    await db.user.update({
+      where: { id: existingUser.id },
+      data: {
+        emailVerified: new Date(),
+        email: existingToken.email,
+      },
+    });
+
+    await db.verificationToken.delete({
+      where: { id: existingToken.id },
+    });
+
+    res.status(201).send({ msg: "verified successfully" });
+  } catch (error: any) {
+    console.error(error);
+    return res.status(500)
+      .send({ msg: "An error occurred", error: error.message });
+  }
+};
