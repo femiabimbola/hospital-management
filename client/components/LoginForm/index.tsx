@@ -44,7 +44,6 @@ export const LoginForm = () => {
       router.push(`http://localhost:3000/`)
       
     } catch (error: any) {
-      console.log(error)
       setError(error.response.data.message)
     }finally {
       setIsLoading(false);

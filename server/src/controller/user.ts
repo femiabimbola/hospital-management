@@ -3,7 +3,7 @@ import { validationResult, matchedData } from "express-validator";
 import bcrypt from "bcryptjs";
 import { getUserByEmail } from "../model/user";
 import { db } from "../lib/db";
-import { sendVerificationEmail } from "../lib/mail/sendMail";
+import { sendVerificationEmail, ResetMail } from "../lib/mail/sendMail";
 import {
   generatePasswordResetToken,
   generateVerificationToken,
@@ -159,22 +159,23 @@ export const logout =  (req: Request, res: any, next: NextFunction) => {
 
 export const sendPassportResetMail = async (req: Request, res: any, next: NextFunction) =>{
   const result = validationResult(req);
-
+ 
   if (!result.isEmpty()) {
     return res.status(400).send({ error: result.array().map((err) => err) });
   }
 
   const data = matchedData(req);
-  const {email} = data;
+  // const {email} = data;
+  const email = req.body.email
   try {
     const exisitingUser = await getUserByEmail(email);
 
-    if (!exisitingUser) return res.status(400).send({ message: "Users is not found" });
+    if (!exisitingUser) return res.status(400).send({ message: "User is not found" });
   
-    const PasswordResetToken = await generatePasswordResetToken(email);
-      await sendVerificationEmail(
-        PasswordResetToken.email,
-        PasswordResetToken.token
+    const ResetToken = await generatePasswordResetToken(email);
+      await ResetMail(
+        ResetToken.email,
+        ResetToken.token
       );
     
       res.status(200).send({ msg: "Password reset email sent" });
@@ -183,6 +184,5 @@ export const sendPassportResetMail = async (req: Request, res: any, next: NextFu
     console.error(error);
     return res.status(500).send({ msg: "An error occurred", error: error.message });
   }
-
 
 }

@@ -29,14 +29,17 @@ export const ForgetPassword = () => {
     const [error, setError] = useState("")
     const [success, setSuccess] = useState("")
   
-    const submit = async (values: z.infer<typeof loginFormSchema>) => {
+    const submit = async (values: z.infer<typeof resetEmailSchema>) => {
       setIsLoading(true);
       setError('')
       setSuccess('')
       try {
+        const response = await axios.post("http://localhost:9000/api/auth/forgot-password", values)
         form.reset()
+        setSuccess(response.data.msg)
       } catch (error: any) {
-        setError(error.response.data.error[0].msg)
+        console.log(error)
+        setError(error.response.data.message)
       }finally {
         setIsLoading(false);
       } 
@@ -44,7 +47,7 @@ export const ForgetPassword = () => {
 
     return (
       <Form {...form}>
-        <form onSubmit={() =>{}} className="space-y-4">
+        <form onSubmit={form.handleSubmit(submit)} className="space-y-4">
   
           {/* email */}
           <FormField
