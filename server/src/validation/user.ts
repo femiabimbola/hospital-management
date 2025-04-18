@@ -57,5 +57,15 @@ export const sendResetPasswordValidationSchema = {
     notEmpty: { errorMessage: "email cannot be empty" },
     isEmail: { errorMessage: "Enter a valid email" },
   },
+}
 
+export const newPasswordValidationSchema = {
+  password: {
+    notEmpty: { errorMessage: "Password cannot be empty" },
+    isLength: { options: { min: 6 }, errorMessage: "password cannot be less than 6" },
+    matches: {
+      options: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$/,
+      errorMessage: "Password must contain at least a digit, symbol, uppercase and lowercase",
+    },
+  }
 }
